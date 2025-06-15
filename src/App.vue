@@ -32,15 +32,6 @@
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 
-// Создаем экземпляр axios с базовым URL
-const api = axios.create({
-  baseURL: '/api', // Используем прокси Vite
-  timeout: 5000,
-  headers: {
-    'Content-Type': 'application/json'
-  }
-})
-
 const todos = ref([])
 const newTodo = ref({
   title: '',
@@ -51,7 +42,7 @@ const newTodo = ref({
 const fetchTodos = async () => {
   try {
     console.log('Fetching todos...')
-    const response = await api.get('/api/todos/') // FIX
+    const response = await axios.get('/api/todos/') // FIX
     console.log('Received:', response.data)
     todos.value = response.data
   } catch (error) {
@@ -71,7 +62,7 @@ const addTodo = async () => {
   }
 
   try {
-    const response = await api.post('/api/todos/', newTodo.value) // FIX
+    const response = await axios.post('/api/todos/', newTodo.value) // FIX
     todos.value.push(response.data)
     newTodo.value = { title: '', description: '', completed: false }
   } catch (error) {
@@ -83,7 +74,7 @@ const deleteTodo = async (id) => {
   if (!confirm('Delete this task?')) return
   
   try {
-    await api.delete(`/api/todos/${id}/`) // FIX
+    await axios.delete(`/api/todos/${id}/`) // FIX
     todos.value = todos.value.filter(todo => todo.id !== id)
   } catch (error) {
     console.error('Delete error:', error)
