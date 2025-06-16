@@ -6,12 +6,10 @@
       <input
           v-model="newTodo.title"
           placeholder="Task title"
-          @keyup.enter="addTodo"
       >
       <input
           v-model="newTodo.description"
           placeholder="Task description"
-          @keyup.enter="addTodo"
       >
       <button @click="addTodo">Add Task</button>
     </div>
@@ -86,9 +84,9 @@ onMounted(fetchTodos)
 
 <style>
 :root {
-  --primary: #42b983;
-  --danger: #ff4444;
-  --border: #ddd;
+  --primary: #43b984;
+  --danger: #fe4545;
+  --border: #dcdcdc;
 }
 
 body {
@@ -112,6 +110,8 @@ body {
 h1 {
   color: var(--primary);
   text-align: center;
+  font-size: 1.92em;
+  margin-bottom: 20.5px;
 }
 
 h3 {
